@@ -138,7 +138,7 @@ module.exports = function(grunt) {
 
     var nose = grunt.util.spawn({
       'cmd': 'python',
-      'args': ['-c', virtualenv + 'import sys; sys.path.insert(0, "'+path.join(__dirname, 'bin')+'"); from nose.core import run_exit; run_exit()'].concat(args),
+      'args': ['-c', virtualenv + 'import sys; sys.path.insert(0, "'+path.join(__dirname, 'lib')+'"); from nose.core import run_exit; run_exit()'].concat(args),
       'opts': {
         'cwd': process.cwd(),
         'stdio': 'inherit',

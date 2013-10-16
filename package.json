@@ -22,7 +22,7 @@
   ],
   "main": "Gruntfile.js",
   "scripts": {
-    "devsetup": "pip install nose --target tasks/bin && grunt clean"
+    "devsetup": "pip install nose --target tasks/lib && grunt clean"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

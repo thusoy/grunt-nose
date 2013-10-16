@@ -2,6 +2,25 @@
   "name": "grunt-nose",
   "version": "0.1.2",
   "description": "Run python unit tests using nose",
+  "homepage": "https://github.com/thusoy/grunt-nose",
+  "author": {
+    "name": "Tarjei Husøy",
+    "url": "https://github.com/thusoy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thusoy/grunt-nose.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thusoy/grunt-nose/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/thusoy/grunt-nose/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
   "scripts": {
     "devsetup": "pip install nose --target tasks/bin && grunt clean"
   },
@@ -11,5 +30,15 @@
     "grunt-contrib-clean": "~0.5.0",
     "matchdep": "~0.3.0",
     "grunt-release": "~0.6.0"
-  }
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin",
+    "nose",
+    "python",
+    "testing",
+    "unittest"
+  ]
 }

@@ -56,6 +56,7 @@ module.exports = function(grunt) {
     var virtualenv = 'pass;';
     if (options.virtualenv){
       virtualenv = getVirtualenvActivationCode(options.virtualenv);
+      grunt.log.verbose.writeln("Using virtualenv at " + options.virtualenv);
       delete options.virtualenv;
     }
 

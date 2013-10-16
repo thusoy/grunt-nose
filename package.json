@@ -1,6 +1,6 @@
 {
   "name": "grunt-nose",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Run python unit tests using nose",
   "scripts": {
     "devsetup": "pip install nose --target tasks/bin && grunt clean"

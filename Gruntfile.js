@@ -75,6 +75,13 @@ module.exports = function(grunt) {
       },
     },
 
+    release: {
+      options: {
+        tagName: 'v<%= version %>',
+        commitMessage: 'Release v<%= version %>',
+      }
+    },
+
   });
 
   // Load grunt plugins found in package.json

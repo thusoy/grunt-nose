@@ -33,11 +33,9 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     nose: {
 
-      default: {
-      },
-
       custom_options: {
         options: {
+          exclude: 'test_venv',
           with_xunit: true,
           xunit_file: 'nosetests.xml',
         },
@@ -46,39 +44,41 @@ module.exports = function(grunt) {
 
       test_options: {
         options: {
-          verbose: true,
           tests: [
             'more_tests',
-            'tests',
+            'simple_test',
           ],
-          // match: "passing",
           debug: [
             'nose.plugins',
             'nose.importer',
           ],
           include: "passing",
-          //pdb_failures: true,
-          //eval_attr: "do_run",
         },
-        //src: 'test/fixtures',
+        src: 'test/fixtures',
+      },
+
+      test_venv: {
+        options: {
+          virtualenv: 'test/fixtures/test_virtualenv',
+          tests: 'test_venv',
+        },
+        src: 'test/fixtures'
       },
 
       full_example: {
         options: {
-          exclude: "test_fails",
-          verbose: true,
+          exclude: "test_venv",
           with_coverage: true,
           cover_package: "fixtures",
           cover_branches: true,
           cover_xml: true,
           cover_html: true,
           cover_html_dir: 'code_coverage',
-          virtualenv: 'test/fixtures/test_virtualenv',
           with_doctest: true,
           with_xunit: true,
         },
         src: "test/fixtures",
-      }
+      },
     },
 
   });

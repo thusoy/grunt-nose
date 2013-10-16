@@ -4,3 +4,4 @@ tmp
 testenv
 tasks/lib
 *.pyc
+nosetests.xml

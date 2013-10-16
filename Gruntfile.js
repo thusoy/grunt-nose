@@ -65,15 +65,9 @@ module.exports = function(grunt) {
         src: 'test/fixtures'
       },
 
-      full_example: {
+      doctest_and_xunit: {
         options: {
           exclude: "test_venv",
-          with_coverage: true,
-          cover_package: "fixtures",
-          cover_branches: true,
-          cover_xml: true,
-          cover_html: true,
-          cover_html_dir: 'code_coverage',
           with_doctest: true,
           with_xunit: true,
         },

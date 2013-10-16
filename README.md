@@ -123,6 +123,7 @@ Default: false
 Look for tests in python modules that are executable. Normal behavior is to exclude executable modules, since they may not be import-safe.
 
 #### noexe
+Type: `Boolean`
 
 DO NOT look for tests in python modules that are executable. (The default on the windows platform is to do so.)
 
@@ -197,7 +198,7 @@ Set the log level to capture
 Type: `Boolean`
 Default: false
 
-Enable plugin Coverage:  Activate a coverage report using Ned Batchelder's coverage module.
+Enable plugin Coverage:  Activate a coverage report using Ned Batchelder's coverage module. Requires coverage to be installed separetly, f. ex in a virtualenv specified by `options.virtualenv`.
 
 #### cover_package
 Type: `String`
@@ -425,12 +426,13 @@ grunt.initConfig({
 })
 ```
 
-A bit more practical though is to utilize some of the power of nose, so if we want code coverage in HTML, we're writing doctests, and we'd like to see the results as a XUnit report, do the following:
+A bit more practical though is to utilize some of the power of nose, so if we want code coverage in HTML, we're writing doctests, and we'd like to see the results as a XUnit report, do the following: (note that coverage must be installed separatly, f. ex in a virtualenv specified by `options.virtualenv`)
 
 ```js
 grunt.initConfig({
   nose: {
     options: {
+      virtualenv: 'my_app_venv',
       with_coverage: true,
       cover_package: "mypackage",
       cover_branches: true,

@@ -446,4 +446,6 @@ grunt.initConfig({
 ```
 
 ## Contributing
+To fetch the nose libs, run `npm script devsetup`, that should install everything you need.
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

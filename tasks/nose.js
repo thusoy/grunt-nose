@@ -33,7 +33,7 @@ module.exports = function(grunt) {
           '\nMake sure this file exist at either of these locations, and try again.');
       }
       var activationCode = 'execfile(r"' + activateThisPath + '", ' +
-        'dict(__file__=r"' + activateThisPath + '")); ';
+        'dict(__file__=r"' + activateThisPath + '"))';
 
       return activationCode;
   };
@@ -53,12 +53,23 @@ module.exports = function(grunt) {
     var args = [];
 
     // Extract options not to be passed along to nose
-    var virtualenv = 'pass;';
+    var virtualenv = 'pass';
     if (options.virtualenv){
       virtualenv = getVirtualenvActivationCode(options.virtualenv);
       grunt.log.verbose.writeln("Using virtualenv at " + options.virtualenv);
       delete options.virtualenv;
     }
+
+    var baseArgs = [
+      '-c',
+      [
+        virtualenv,
+        'import sys',
+        'sys.path.insert(0, r"'+path.join(__dirname, 'lib')+'")',
+        'from nose.core import run_exit',
+        'run_exit()'
+      ].join('; ')
+    ];
 
     // Set the nose 'where' option for each of the files specified for the task
     this.filesSrc.forEach(function(filepath){
@@ -138,7 +149,7 @@ module.exports = function(grunt) {
 
     var nose = grunt.util.spawn({
       'cmd': 'python',
-      'args': ['-c', virtualenv + 'import sys; sys.path.insert(0, "'+path.join(__dirname, 'lib')+'"); from nose.core import run_exit; run_exit()'].concat(args),
+      'args': baseArgs.concat(args),
       'opts': {
         'cwd': process.cwd(),
         'stdio': 'inherit',

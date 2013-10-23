@@ -37,6 +37,7 @@ module.exports = function(grunt) {
         options: {
           exclude: 'test_venv',
           with_xunit: true,
+          verbose: false,
           xunit_file: 'nosetests.xml',
         },
         src: 'test/fixtures',

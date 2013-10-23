@@ -77,7 +77,8 @@ module.exports = function(grunt) {
     });
 
     for (var prop in options){
-      if (!options.hasOwnProperty(prop)){
+      // If it's a flag that's set to false, skip
+      if (!options.hasOwnProperty(prop) || options[prop] === false){
         continue;
       }
 
@@ -87,8 +88,6 @@ module.exports = function(grunt) {
       }
 
       // If the property is not a flag, add the desired option value
-      // We count the option as a flag if the property === true
-      // Note: Specifying false as a value will not exclude the flag, omit the option entirely to do so
       if (options[prop] !== true){
 
         // If the option value is a file path, make sure it's relative the the process cwd, since

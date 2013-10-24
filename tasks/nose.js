@@ -32,8 +32,7 @@ module.exports = function(grunt) {
           'these locations:\n' + activeThisPathAlternatives.join("\n") +
           '\nMake sure this file exist at either of these locations, and try again.');
       }
-      var activationCode = 'execfile(r"' + activateThisPath + '", ' +
-        'dict(__file__=r"' + activateThisPath + '"))';
+      var activationCode = 'f = r"'+activateThisPath+'"; import activation_tools as at; at.activate_virtualenv(f)';
 
       return activationCode;
   };
@@ -63,9 +62,9 @@ module.exports = function(grunt) {
     var baseArgs = [
       '-c',
       [
-        virtualenv,
         'import sys',
         'sys.path.insert(0, r"'+path.join(__dirname, 'lib')+'")',
+        virtualenv,
         'from nose.core import run_exit',
         'run_exit()'
       ].join('; ')

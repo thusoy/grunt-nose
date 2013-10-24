@@ -1,5 +1,5 @@
 # Note: Slightly modified from original activate_this.py: not taking
-# os into account when adding site-packages dir, always using lib/python2.7/site-packages
+# os (or python version) into account when adding site-packages dir, always using lib/python2.7/site-packages
 """By using execfile(this_file, dict(__file__=this_file)) you will
 activate this virtualenv environment.
 
@@ -18,7 +18,7 @@ import os
 old_os_path = os.environ['PATH']
 os.environ['PATH'] = os.path.dirname(os.path.abspath(__file__)) + os.pathsep + old_os_path
 base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-site_packages = os.path.join(base, 'lib', 'python%s' % sys.version[:3], 'site-packages')
+site_packages = os.path.join(base, 'lib', 'python2.7', 'site-packages')
 prev_sys_path = list(sys.path)
 import site
 site.addsitedir(site_packages)

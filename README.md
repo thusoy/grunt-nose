@@ -1,5 +1,7 @@
 # grunt-nose
 
+[![Build Status](https://travis-ci.org/thusoy/grunt-nose.png?branch=master)](https://travis-ci.org/thusoy/grunt-nose)
+
 > Running python unit tests using nose.
 
 ## Getting Started

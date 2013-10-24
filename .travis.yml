@@ -1,0 +1,15 @@
+language:
+  - python
+  - node_js
+
+# Make sure the plugin works in the two most recent python versions
+python:
+  - "2.7"
+  - "3.3"
+
+install:
+  - npm install -g grunt-cli
+  - npm install
+
+script:
+  - grunt

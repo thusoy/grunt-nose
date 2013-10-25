@@ -9,6 +9,7 @@ python:
 
 install:
   - npm install -g grunt-cli
+  - npm run-script devsetup
   - npm install
 
 script:

@@ -4,3 +4,4 @@ tmp
 testenv
 *.pyc
 nosetests.xml
+tasks/lib/nose

@@ -27,7 +27,10 @@ module.exports = function(grunt) {
     clean: {
       report: ['nosetests.xml'],
       python: ['test/**/*.pyc'],
-      install_artifacts: ['tasks/lib/*.egg-info'],
+      install_artifacts: [
+        'tasks/lib/*.egg-info',
+        'tasks/lib/*.tar.gz',
+      ],
     },
 
     // Configuration to be run (and then tested).

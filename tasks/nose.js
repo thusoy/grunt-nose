@@ -58,16 +58,24 @@ module.exports = function(grunt) {
       grunt.log.verbose.writeln("Using virtualenv at " + options.virtualenv);
       delete options.virtualenv;
     }
+    
+    var pythonCode = [];  
+      
+    var externalNose = options.externalNose;
+    delete options.externalNose;
 
+    pythonCode.push('import sys');
+      
+    if (!externalNose) {
+      pythonCode.push('sys.path.insert(0, r"'+path.join(__dirname, 'lib')+'")');
+
+    }
+
+    pythonCode.push(virtualenv, 'from nose.core import run_exit', 'run_exit()');
+      
     var baseArgs = [
       '-c',
-      [
-        'import sys',
-        'sys.path.insert(0, r"'+path.join(__dirname, 'lib')+'")',
-        virtualenv,
-        'from nose.core import run_exit',
-        'run_exit()'
-      ].join('; ')
+      pythonCode.join('; ')
     ];
 
     // Set the nose 'where' option for each of the files specified for the task

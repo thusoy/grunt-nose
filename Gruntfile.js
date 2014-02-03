@@ -76,6 +76,15 @@ module.exports = function(grunt) {
         },
         src: "test/fixtures/package_with_doctest",
       },
+
+      externalNose: {
+        options: {
+          externalNose: true,
+          virtualenv: 'test/test_virtualenv_with_nose',
+          tests: 'simple_test',
+        },
+        src: "test/fixtures",
+      },
     },
 
     release: {

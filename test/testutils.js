@@ -20,3 +20,12 @@ exports.parseReport = function (reportName, callback) {
     });
   });
 };
+
+exports.readReport = function (reportName, callback) {
+  fs.readFile('reports/' + reportName + '.xml', 'utf8', function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    callback(data);
+  });
+};

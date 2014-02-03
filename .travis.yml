@@ -42,3 +42,6 @@ script:
   # ...and finally that the correct number of tests was run (and no failures)
   - grep tests=\"1\" nosetests.xml
   - grep errors=\"0\" nosetests.xml
+
+notifications:
+  email: false

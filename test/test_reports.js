@@ -35,3 +35,11 @@ exports.testSpecificTests = function (test) {
     test.done();
   });
 };
+
+exports.testExternalNose = function (test) {
+  test.expect(1);
+  testutils.readReport('externalNose', function (data) {
+    test.equal(data, 'Printed from external nose');
+    test.done();
+  });
+};

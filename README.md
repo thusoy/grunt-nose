@@ -392,6 +392,12 @@ Type: `String`
 
 Run the unit tests in this virtualenv.
 
+#### externalNose
+Type: `Boolean`  
+Default: false
+
+Use nose modules from python interpreter in path.
+
 #### with_xunit
 Type: `Boolean`  
 Default: false

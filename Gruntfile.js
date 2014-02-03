@@ -89,7 +89,7 @@ module.exports = function(grunt) {
   });
 
   // Load grunt plugins found in package.json
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('load-grunt-tasks')(grunt);
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');

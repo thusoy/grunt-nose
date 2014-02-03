@@ -32,8 +32,12 @@ module.exports = function(grunt) {
           'these locations:\n' + activeThisPathAlternatives.join("\n") +
           '\nMake sure this file exist at either of these locations, and try again.');
       }
-      var activationCode = 'f = r"'+activateThisPath+'"; import activation_tools as at; at.activate_virtualenv(f)';
+      var activationToolsPath = path.join(__dirname, 'activation_tools');
+      var activationCode = [
+        'sys.path.insert(0, r"' + activationToolsPath + '")',
+        'f = r"'+activateThisPath+'"; import activation_tools as at; at.activate_virtualenv(f)',
 
+      ].join('; ');
       return activationCode;
   };
 
@@ -50,29 +54,27 @@ module.exports = function(grunt) {
 
     // Arguments to be passed along to nose
     var args = [];
+    var pythonCode = [
+      // Import sys so that virtualenvs and internal nose can add to path
+      'import sys',
+    ];
 
     // Extract options not to be passed along to nose
-    var virtualenv = 'pass';
     if (options.virtualenv){
-      virtualenv = getVirtualenvActivationCode(options.virtualenv);
+      pythonCode.push(getVirtualenvActivationCode(options.virtualenv));
       grunt.log.verbose.writeln("Using virtualenv at " + options.virtualenv);
       delete options.virtualenv;
     }
-    
-    var pythonCode = [];  
-      
+
     var externalNose = options.externalNose;
     delete options.externalNose;
 
-    pythonCode.push('import sys');
-      
     if (!externalNose) {
       pythonCode.push('sys.path.insert(0, r"'+path.join(__dirname, 'lib')+'")');
-
     }
 
-    pythonCode.push(virtualenv, 'from nose.core import run_exit', 'run_exit()');
-      
+    pythonCode.push('from nose.core import run_exit', 'run_exit()');
+
     var baseArgs = [
       '-c',
       pythonCode.join('; ')

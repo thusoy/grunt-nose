@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      report: ['nosetests.xml'],
+      reports: ['reports'],
       python: ['test/**/*.pyc'],
       install_artifacts: [
         'tasks/lib/*.egg-info',
@@ -36,46 +36,45 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     nose: {
 
-      custom_options: {
+      // All targets generate a report we can use to test the test execution results
+      options: {
+        with_xunit: true,
+        xunit_file: 'reports/<%= grunt.task.current.target %>.xml',
+      },
+
+      // By default, tests will be loaded from test_venv.py and simple_test.py
+      exclude: {
         options: {
           exclude: 'test_venv',
-          with_xunit: true,
-          verbose: false,
-          xunit_file: 'nosetests.xml',
         },
         src: 'test/fixtures',
       },
 
-      test_options: {
+      // Try to include more_tests.py as well
+      specificTests: {
         options: {
           tests: [
             'more_tests',
             'simple_test',
-          ],
-          debug: [
-            'nose.plugins',
-            'nose.importer',
           ],
           include: "passing",
         },
         src: 'test/fixtures',
       },
 
-      test_venv: {
+      virtualenv: {
         options: {
-          virtualenv: 'test/fixtures/test_virtualenv',
+          virtualenv: 'test/test_virtualenv',
           tests: 'test_venv',
         },
         src: 'test/fixtures'
       },
 
-      doctest_and_xunit: {
+      doctest: {
         options: {
-          exclude: "test_venv",
           with_doctest: true,
-          with_xunit: true,
         },
-        src: "test/fixtures",
+        src: "test/fixtures/package_with_doctest",
       },
     },
 
@@ -86,6 +85,10 @@ module.exports = function(grunt) {
       }
     },
 
+    nodeunit: {
+      all: ['test/test_reports.js'],
+    }
+
   });
 
   // Load grunt plugins found in package.json
@@ -95,6 +98,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Task aliases
-  grunt.registerTask('default', ['jshint', 'clean', 'nose']);
+  grunt.registerTask('default', ['jshint', 'clean', 'nose', 'nodeunit']);
 
 };

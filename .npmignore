@@ -3,5 +3,5 @@ npm-debug.log
 tmp
 testenv
 *.pyc
-nosetests.xml
+reports
 tasks/lib/nose

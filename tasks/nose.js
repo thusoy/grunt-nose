@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         // windows style path:
         path.join(virtualenv, 'Scripts', 'activate_this.py'),
       ];
-      grunt.util._.forEach(activeThisPathAlternatives, function(path){
+      activeThisPathAlternatives.forEach(function(path){
         if (grunt.file.exists(path)){
           activateThisPath = path;
           return false; // stops iteration

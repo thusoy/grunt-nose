@@ -453,7 +453,7 @@ grunt.initConfig({
     },
   },
 })
-```
+```r
 
 ## Contributing
 To fetch the nose libs, run `npm run-script devsetup`, that should install everything you need.
@@ -461,6 +461,9 @@ To fetch the nose libs, run `npm run-script devsetup`, that should install every
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Changelog
+
+## v0.3.0 (2014-02-10)
+Remove grunt.util._-usage.
 
 ### v0.2.0 (2014-02-03)
 Add option externalNose to not use the included nose.

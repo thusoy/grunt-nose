@@ -1,6 +1,6 @@
 {
   "name": "grunt-nose",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Run python unit tests using nose",
   "homepage": "https://github.com/thusoy/grunt-nose",
   "author": {

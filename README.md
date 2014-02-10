@@ -462,6 +462,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Changelog
 
+## v0.3.1 (2013-02-10)
+Fix bug with the 'config' option.
+
 ## v0.3.0 (2014-02-10)
 Remove grunt.util._-usage.
 

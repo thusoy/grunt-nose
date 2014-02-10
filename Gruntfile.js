@@ -85,6 +85,16 @@ module.exports = function(grunt) {
         },
         src: "test/fixtures",
       },
+
+      mergeConfig: {
+        options: {
+          config: [
+            'test/fixtures/ignore_venv.noserc',
+            'test/fixtures/include_more_tests.noserc',
+          ],
+        },
+        src: "test/fixtures",
+      },
     },
 
     release: {

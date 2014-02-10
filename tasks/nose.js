@@ -114,7 +114,7 @@ module.exports = function(grunt) {
         ];
 
         // Several config files can be merged
-        if (prop === 'config' && typeof options[prop] === 'Object'){
+        if (prop === 'config' && typeof options[prop] === 'object'){
           for(var i = 0; i < options[prop].length; i++){
             var configFile = options[prop][i];
             args.push('--config=' + configFile);

@@ -43,3 +43,12 @@ exports.testExternalNose = function (test) {
     test.done();
   });
 };
+
+exports.testMergeConfig = function (test) {
+  test.expect(2);
+  testutils.parseReport('mergeConfig', function (testData) {
+    test.equal(testData.numTests, 2);
+    test.equal(testData.numSuccess, 2);
+    test.done();
+  });
+};

@@ -6,9 +6,11 @@
  * Licensed under the Apache, 2.0 licenses.
  */
 
+ // jshint camelcase:false
+
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -27,7 +29,7 @@ module.exports = function(grunt) {
     clean: {
       reports: ['reports'],
       python: ['test/**/*.pyc'],
-      install_artifacts: [
+      installArtifacts: [
         'tasks/lib/*.egg-info',
         'tasks/lib/*.tar.gz',
       ],
@@ -88,7 +90,7 @@ module.exports = function(grunt) {
     },
 
     nodeunit: {
-      all: ['test/test_reports.js'],
+      all: ['test/test_*.js'],
     }
 
   });

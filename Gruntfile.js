@@ -42,10 +42,10 @@ module.exports = function(grunt) {
         xunit_file: 'reports/<%= grunt.task.current.target %>.xml',
       },
 
-      // By default, tests will be loaded from test_venv.py and simple_test.py
+      // By default, tests will be run from simple_test.py and test_exclude.py
       exclude: {
         options: {
-          exclude: 'test_venv',
+          exclude: 'test_exclude',
         },
         src: 'test/fixtures',
       },
@@ -62,14 +62,6 @@ module.exports = function(grunt) {
         src: 'test/fixtures',
       },
 
-      virtualenv: {
-        options: {
-          virtualenv: 'test/test_virtualenv',
-          tests: 'test_venv',
-        },
-        src: 'test/fixtures'
-      },
-
       doctest: {
         options: {
           with_doctest: true,
@@ -77,19 +69,10 @@ module.exports = function(grunt) {
         src: "test/fixtures/package_with_doctest",
       },
 
-      externalNose: {
-        options: {
-          externalNose: true,
-          virtualenv: 'test/test_virtualenv_with_nose',
-          tests: 'simple_test',
-        },
-        src: "test/fixtures",
-      },
-
       mergeConfig: {
         options: {
           config: [
-            'test/fixtures/ignore_venv.noserc',
+            'test/fixtures/exclude.noserc',
             'test/fixtures/include_more_tests.noserc',
           ],
         },

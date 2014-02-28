@@ -34,14 +34,34 @@ script:
   - test -d node_modules/grunt-nose/tasks/lib/nose
 
   # test that a nose task can be run
-  - grunt nose
+  - grunt nose:exampleProject
 
   # test that it generated a result file
   - test -f nosetests.xml
 
-  # ...and finally that the correct number of tests was run (and no failures)
+  # ...and that the correct number of tests was run (and no failures)
   - grep tests=\"1\" nosetests.xml
   - grep errors=\"0\" nosetests.xml
+
+  # test that virtualenv works
+  - virtualenv venv -p `which python`
+  - . venv/bin/activate
+
+  # install the venv exclusive package we're testing against
+  - pip install ../grunt-nose/test/fixtures/virtualenv_exclusive
+
+  # test the virtualenv
+  - grunt nose:virtualenv
+
+  # test that external nose works
+  # first, remove the included nose
+  - rm -rf node_modules/grunt-nose/tasks/lib/nose
+  # install real nose
+  - pip install nose
+
+  - grunt nose:externalNose
+
+  # Hurray, all good matey!
 
 notifications:
   email: false

@@ -7,8 +7,25 @@ module.exports = function(grunt) {
         options: {
           with_xunit: true,
           xunit_file: 'nosetests.xml',
+          exclude: 'test_venv',
         }
-      }
+      },
+
+      virtualenv: {
+        options: {
+          virtualenv: 'venv',
+        },
+        src: 'tests'
+      },
+
+      externalNose: {
+        options: {
+          virtualenv: 'venv',
+          externalNose: true,
+        },
+        src: "tests",
+      },
+
     }
 
   });

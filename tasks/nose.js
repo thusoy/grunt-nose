@@ -8,38 +8,19 @@
 
 'use strict';
 
+var path = require('path');
+
+/* Get a python exe to use. If virtualenv is not defined, will use the one found on PATH. */
+function getPythonExecutable(virtualenv) {
+  var isWin = /^win/.test(process.platform);
+  var pythonExec = isWin ?
+    path.join(virtualenv, 'Scripts', 'python.exe') :
+    path.join(virtualenv, 'bin', 'python');
+  return pythonExec;
+}
+
 module.exports = function(grunt) {
 
-  var path = require('path');
-
-  var getVirtualenvActivationCode = function(virtualenv){
-      var activateThisPath;
-      var activeThisPathAlternatives = [
-        // *nix activate_this path:
-        path.join(virtualenv, 'bin', 'activate_this.py'),
-        // windows style path:
-        path.join(virtualenv, 'Scripts', 'activate_this.py'),
-      ];
-      activeThisPathAlternatives.forEach(function(path){
-        if (grunt.file.exists(path)){
-          activateThisPath = path;
-          return false; // stops iteration
-        }
-      });
-      if (activateThisPath === undefined){
-        grunt.fail.warn('Tried to activate virtualenv "' + virtualenv + '", but did not ' +
-          'find the file "activate_this.py" required for activation, after trying ' +
-          'these locations:\n' + activeThisPathAlternatives.join("\n") +
-          '\nMake sure this file exist at either of these locations, and try again.');
-      }
-      var activationToolsPath = path.join(__dirname, 'activation_tools');
-      var activationCode = [
-        'sys.path.insert(0, r"' + activationToolsPath + '")',
-        'f = r"'+activateThisPath+'"; import activation_tools as at; at.activate_virtualenv(f)',
-
-      ].join('; ');
-      return activationCode;
-  };
 
   grunt.registerMultiTask('nose', 'Run python unit tests with nose.', function() {
     var done = this.async();
@@ -52,17 +33,15 @@ module.exports = function(grunt) {
       grunt.fail.warn("Dont't specify the 'where' option in the options, use the task src property instead!");
     }
 
+
     // Arguments to be passed along to nose
     var args = [];
-    var pythonCode = [
-      // Import sys so that virtualenvs and internal nose can add to path
-      'import sys',
-    ];
+    var pythonCode = [];
 
     // Extract options not to be passed along to nose
-    if (options.virtualenv){
-      pythonCode.push(getVirtualenvActivationCode(options.virtualenv));
-      grunt.log.verbose.writeln("Using virtualenv at " + options.virtualenv);
+    var pythonExecutable = 'python';
+    if (options.virtualenv) {
+      pythonExecutable = getPythonExecutable(options.virtualenv);
       delete options.virtualenv;
     }
 
@@ -70,7 +49,8 @@ module.exports = function(grunt) {
     delete options.externalNose;
 
     if (!externalNose) {
-      pythonCode.push('sys.path.insert(0, r"'+path.join(__dirname, 'lib')+'")');
+      // Use the nose shipped with the plugin
+      pythonCode.push('import sys', 'sys.path.insert(0, r"' + path.join(__dirname, 'lib') + '")');
     }
 
     pythonCode.push('from nose.core import run_exit', 'run_exit()');
@@ -153,10 +133,11 @@ module.exports = function(grunt) {
       args.push(cli_arg);
     }
 
-    grunt.log.verbose.writeln("Running nose with the following args: " + args.join(", "));
+    grunt.log.verbose.writeln("Using python executable at " + pythonExecutable);
+    grunt.log.verbose.writeln("Running nose with the following args: " + args.join(" "));
 
     var nose = grunt.util.spawn({
-      'cmd': 'python',
+      'cmd': pythonExecutable,
       'args': baseArgs.concat(args),
       'opts': {
         'cwd': process.cwd(),
@@ -165,8 +146,16 @@ module.exports = function(grunt) {
     }, function(error, result, code){
       if (code === 0){
         grunt.log.ok("Python unit tests completed successfully.");
+      } else {
+        grunt.log.writeln("Something failed spawning python. I tried to launch this python: " +
+          pythonExecutable + ", please check that this works. Also, I tried to pass the " +
+          "following arguments: " + '-c "' + baseArgs.slice(1).join(" ") + '"' + args.join(" "));
       }
       done(code === 0);
+    });
+
+    nose.on('error', function (err) {
+      grunt.log.error("Running nose failed with the following error: " + err);
     });
 
   });

@@ -462,6 +462,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Changelog
 
+## v0.4.0 (2013-03-01)
+Use python executable from virtualenvs.
+
 ## v0.3.1 (2013-02-10)
 Fix bug with the 'config' option.
 

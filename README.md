@@ -179,7 +179,7 @@ Type: `String`
 
 Specify custom date/time format to print statements. Uses the same format as used by standard logging handlers.
 
-### logging_filter
+#### logging_filter
 Type: `String`
 
 Specify which statements to filter in/out. By default, everything is captured. If the output is too verbose, use this option to filter out needless output. Example: filter=foo will capture statements issued ONLY to  foo or foo.what.ever.sub but not foobar or other logger. Specify multiple loggers with comma: filter=foo,bar,baz. If any logger name is prefixed with a minus, eg filter=-foo, it will be excluded rather than included. Default: exclude logging messages from nose itself (-nose). Can also be specified by envvar NOSE_LOGFILTER.
@@ -190,7 +190,7 @@ Default: false
 
 Clear all other logging handlers
 
-### logging_level
+#### logging_level
 Type: `String`  
 Default: 'DEBUG'
 

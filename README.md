@@ -453,7 +453,7 @@ grunt.initConfig({
     },
   },
 })
-```r
+```
 
 ## Contributing
 To fetch the nose libs, run `npm run-script devsetup`, that should install everything you need.
@@ -462,13 +462,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Changelog
 
-## v0.4.0 (2013-03-01)
+### v0.4.0 (2013-03-01)
 Use python executable from virtualenvs.
 
-## v0.3.1 (2013-02-10)
+### v0.3.1 (2013-02-10)
 Fix bug with the 'config' option.
 
-## v0.3.0 (2014-02-10)
+### v0.3.0 (2014-02-10)
 Remove grunt.util._-usage.
 
 ### v0.2.0 (2014-02-03)

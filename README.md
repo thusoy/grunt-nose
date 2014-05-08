@@ -447,7 +447,6 @@ grunt.initConfig({
       cover_xml: true,
       coverage_html: true,
       coverage_html_dir: 'code_coverage',
-      virtualenv: 'my_app_venv',
       with_doctest: true,
       with_xunit: true,
     },

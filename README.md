@@ -461,6 +461,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Changelog
 
+### v1.0.0 (2015-03-11)
+
+- Enable loading tests from several directories (issue #11)
+- Update bundled nose to 1.3.4
+
 ### v0.4.0 (2013-03-01)
 Use python executable from virtualenvs.
 

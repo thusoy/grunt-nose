@@ -31,7 +31,6 @@ module.exports = function (grunt) {
       python: ['test/**/*.pyc'],
       installArtifacts: [
         'tasks/lib/*.egg-info',
-        'tasks/lib/*.tar.gz',
       ],
     },
 

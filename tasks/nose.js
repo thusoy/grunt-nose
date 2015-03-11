@@ -48,10 +48,14 @@ function getPythonCode(options) {
 function getNoseArgs(files, options, grunt) {
   var noseArgs = [];
 
-  // Set the nose 'where' option for each of the files
-  files.forEach(function (filepath) {
-    noseArgs.push('--where=' + path.join(process.cwd(), filepath));
-  });
+  // Issue #11: -w is deprecated for more than a single directory, thus only use it if that's the
+  // case. Otherwise add the desired directories/files as positional arguments, see the bottom of
+  // this function.
+  if (files.length <= 1) {
+    files.forEach(function (filepath) {
+      noseArgs.push('--where=' + path.join(process.cwd(), filepath));
+    });
+  }
 
   var addConfigFile = function (configFile) {
     noseArgs.push('--config=' + configFile);
@@ -119,6 +123,15 @@ function getNoseArgs(files, options, grunt) {
     }
     noseArgs.push(cliArg);
   }
+
+  // Issue #11: If more than a single source is specified -w is deprecated, thus we add them as
+  // positional arguments
+  if (files.length > 1) {
+    files.forEach(function (filepath) {
+      noseArgs.push(path.join(process.cwd(), filepath));
+    });
+  }
+
   return noseArgs;
 }
 

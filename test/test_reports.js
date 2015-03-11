@@ -35,3 +35,12 @@ exports.testMergeConfig = function (test) {
     test.done();
   });
 };
+
+exports.testMultiDirectory = function (test) {
+  test.expect(2);
+  testutils.parseReport('multiDirectoryLoading', function (testData) {
+    test.equal(testData.numTests, 3);
+    test.equal(testData.numSuccess, 3);
+    test.done();
+  });
+};

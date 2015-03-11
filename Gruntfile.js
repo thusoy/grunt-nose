@@ -80,6 +80,13 @@ module.exports = function (grunt) {
         },
         src: "test/fixtures",
       },
+
+      multiDirectoryLoading: {
+        src: [
+          "test/fixtures",
+          "test/other_testdir",
+        ]
+      }
     },
 
     release: {

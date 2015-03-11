@@ -22,9 +22,9 @@
   ],
   "main": "Gruntfile.js",
   "scripts": {
-    "devsetup": "cd tasks/lib && pip install nose==1.3.0 --download . --no-use-wheel",
+    "devsetup": "cd tasks/lib && pip install nose==1.3.4 --download . --no-use-wheel",
     "prepublish": "grunt clean",
-    "postinstall": "cd tasks/lib && pip install nose-1.3.0.tar.gz --target ."
+    "postinstall": "cd tasks/lib && pip install nose-1.3.4.tar.gz --target ."
   },
   "devDependencies": {
     "grunt": "~0.4.2",

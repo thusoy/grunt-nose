@@ -461,7 +461,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Changelog
 
-### UNRELEASED
+### v1.1.0 (2016-12-04)
 - Remove peer dependency on grunt
 - Update bundled nose to 1.3.7
 

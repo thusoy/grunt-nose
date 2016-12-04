@@ -463,6 +463,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### UNRELEASED
 - Remove peer dependency on grunt
+- Update bundled nose to 1.3.7
 
 ### v1.0.1 (2016-02-20)
 - Make compatible with grunt 1.0

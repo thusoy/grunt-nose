@@ -2,6 +2,8 @@ language:
   - python
   - node_js
 
+sudo: false
+
 # Make sure the plugin works in the two most recent python versions
 python:
   - "2.7"

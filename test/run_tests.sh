@@ -15,7 +15,7 @@ rm -rf tasks/lib/nose
 # Let's try to do a local install and check that it works
 cp -r test/fixtures/exampleNewProject ../
 cd ../exampleNewProject
-npm install ../grunt-nose
+npm install ../grunt-nose grunt
 
 # that should have installed everything needed, lets test that!
 
